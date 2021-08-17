@@ -10,7 +10,7 @@ function App() {
   const [subBreeds, setSubBreeds] = useState([]);
   const [selectedSubBreed, setSelectedSubBreed] = useState('');
   const [dogsToFetch, setDogsToFetch] = useState({});
-  const [imageNum, setImageNum] = useState(1);
+  const [imageNum, setImageNum] = useState(0);
   const [selectedImage, setSelectedImage] = useState({});
 
   // data fetching
@@ -26,16 +26,13 @@ function App() {
     setSelectedSubBreed('');
   }, [selectedBreed]);
 
-  useEffect(() => {
-    console.log({ selectedBreed, selectedSubBreed, imageNum });
-  }, [selectedBreed, selectedSubBreed, imageNum]);
-
   // generates an array of numbers from 0-49 for the dropdown list
   // (because the max number of images that the api will provide is 50)
   const numArr = Array.from(Array(50).keys());
 
   function handleSubmit(e) {
     e.preventDefault();
+
     setDogsToFetch({
       breed: selectedBreed,
       subBreed: selectedSubBreed,
@@ -102,7 +99,7 @@ function App() {
           </select>
         </FormControl>
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">View Images</Button>
       </Form>
       <Images>
         {imageError && <Error>Oh no, something went wrong! 🐶</Error>}
@@ -163,13 +160,13 @@ const FormControl = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 1rem;
-  
+
   @media (max-width: 500px) {
     align-items: center;
     margin: 0;
     margin-bottom: 1rem;
   }
-  
+
   select {
     border-radius: 5px;
     padding: 0.375rem 0.5rem;
@@ -185,8 +182,8 @@ const Button = styled.button`
   margin-right: 1rem;
   padding: 0.375rem 0.5rem;
   border-radius: 5px;
-  border: 1px solid #A5AAA3;
-  background-color: #812F33;
+  border: 1px solid #a5aaa3;
+  background-color: #812f33;
   color: white;
   cursor: pointer;
 
